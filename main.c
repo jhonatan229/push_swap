@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 16:22:03 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:37:57 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	rotate_list(int *lst, int size)
 {
 	int aux;
 
+	if (size < 2)
+		return ;
 	size--;
 	aux = lst[size];
 	while (size != 0)
@@ -24,6 +26,23 @@ void	rotate_list(int *lst, int size)
 		size--;
 	}
 	lst[size] = aux;
+}
+
+void	reverse_rotate_list(int *lst, int size)
+{	
+	int aux;
+	int	count;
+
+	if (size < 2)
+		return ;	
+	count = 0;
+	aux = lst[count];
+	while (count < size - 1)
+	{
+		lst[count] = lst[count + 1];
+		count++;
+	}
+	lst[count] = aux;
 }
 
 void	put_lst_to_lst(t_lists *list, int signal)
@@ -103,7 +122,10 @@ int main(int argc, char **argv)
 	printf("\n\n");
 	print_list(&lst);
 	printf("\n\n");
-	rotate_list(lst.list_a, lst.size_a);
+	rotate_list(lst.list_b, lst.size_b);
+	print_list(&lst);
+	printf("\n\n");
+	reverse_rotate_list(lst.list_b, lst.size_b);
 	print_list(&lst);
 	return (0);
 }
