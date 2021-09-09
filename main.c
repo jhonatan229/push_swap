@@ -6,13 +6,27 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 14:05:55 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 16:22:03 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void put_lst_to_lst(t_lists *list, int signal)
+void	rotate_list(int *lst, int size)
+{
+	int aux;
+
+	size--;
+	aux = lst[size];
+	while (size != 0)
+	{
+		lst[size] = lst[size - 1];
+		size--;
+	}
+	lst[size] = aux;
+}
+
+void	put_lst_to_lst(t_lists *list, int signal)
 {
 	if (signal == 1)
 	{
@@ -39,7 +53,7 @@ void put_lst_to_lst(t_lists *list, int signal)
 		list->size_b++;
 	}
 }
-void swap(int *lst, int size)
+void	swap(int *lst, int size)
 {
 	int aux;
 	
@@ -65,7 +79,6 @@ static void print_list(t_lists *list)
 		printf("list B %i: %i\n", n, list->list_b[n]);
 		n++;
 	}
-	
 }
 
 int main(int argc, char **argv)
@@ -88,6 +101,9 @@ int main(int argc, char **argv)
 	swap(lst.list_a, argc - 1);
 	put_lst_to_lst(&lst, 2);
 	printf("\n\n");
+	print_list(&lst);
+	printf("\n\n");
+	rotate_list(lst.list_a, lst.size_a);
 	print_list(&lst);
 	return (0);
 }
