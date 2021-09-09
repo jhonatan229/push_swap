@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 17:21:19 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:45:35 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ int main(int argc, char **argv)
 	n = 0;
 	lst.list_a = (int *)malloc(argc - 1);
 	lst.list_b = (int *)malloc(argc - 1);
-	while (n + 1< argc)
+	argc--;
+	while (argc != 0)
 	{
-		ft_isdigit(argv[n + 1], &lst);
-		lst.list_a[n] = verify_number(ft_atoi(argv[n + 1], &lst), &lst);
-		n++;
+		ft_isdigit(argv[argc], &lst);
+		lst.list_a[n++] = verify_number(ft_atoi(argv[argc--], &lst), &lst);
 	}
 	lst.size_a = n;
 	lst.size_b = 0;
