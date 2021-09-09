@@ -1,5 +1,8 @@
 NAME = push_swap
-FILES = ./utils.c ./main.c
+FILES = ./utils.c ./main.c ./utils_order_list.c
+
+CC = clang
+CFLAGS = -Wextra -Werror -Wall
 
 all: $(NAME)
 

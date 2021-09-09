@@ -6,20 +6,21 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 12:29:19 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:22:16 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	verify_number(int add, int *list)
+int	verify_number(int add, t_lists *list)
 {
 	int count = 0;
-	while (list[count])
+	while (list->list_a[count])
 	{
-		if (list[count] == add)
+		if (list->list_a[count] == add)
 		{
-			printf("number cloned!!\n");
+			free(list->list_a);
+			free(list->list_b);
 			exit(2);
 		}
 		count++;
@@ -27,7 +28,7 @@ int	verify_number(int add, int *list)
 	return (add);
 }
 
-int ft_isdigit(char *str)
+int ft_isdigit(char *str, t_lists *list)
 {
 	int count;
 
@@ -36,7 +37,8 @@ int ft_isdigit(char *str)
 	{
 		if (str[count] < 48 || str[count] > 57)
 		{
-			printf("letters is not permitido\n");
+			free(list->list_a);
+			free(list->list_b);
 			exit(1);
 		}
 		count++;
@@ -56,7 +58,7 @@ int static	ft_addnum(int *num, char c)
 	return (1);
 }
 
-int	ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr, t_lists *list)
 {
 	int	sinal;
 	int	num;
@@ -73,5 +75,11 @@ int	ft_atoi(const char *nptr)
 	}
 	while (ft_addnum(&num, *nptr) == 0)
 		nptr++;
+	if (num * sinal < -2147483648 || num * sinal > 2147483647)
+	{
+		free(list->list_a);
+		free(list->list_b);
+		exit(1);
+	}
 	return (num * sinal);
 }

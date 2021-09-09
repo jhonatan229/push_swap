@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:21:36 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 13:14:24 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 17:22:31 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,12 @@ typedef struct s_lists{
 	int size_b;
 }			t_lists;
 
-int	ft_isdigit(char *str);
-int	ft_atoi(const char *nptr);
-int	verify_number(int add, int *list);
+int 	ft_isdigit(char *str, t_lists *list);
+int		ft_atoi(const char *nptr, t_lists *list);
+int		verify_number(int add, t_lists *list);
+void	swap(int *lst, int size);
+void	put_lst_to_lst(t_lists *list, int signal);
+void	reverse_rotate_list(int *lst, int size);
+void	rotate_list(int *lst, int size);
 
 #endif // UTILS_H
