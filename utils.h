@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:21:36 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 17:22:31 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 19:45:22 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_lists{
 	int *list_a;
@@ -31,5 +32,7 @@ void	swap(int *lst, int size);
 void	put_lst_to_lst(t_lists *list, int signal);
 void	reverse_rotate_list(int *lst, int size);
 void	rotate_list(int *lst, int size);
+int		verify_sort_list(int *lst, int size);
+void	free_lst_exit(t_lists *list, int signal);
 
 #endif // UTILS_H

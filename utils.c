@@ -6,11 +6,20 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 17:22:16 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 19:44:54 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+void	free_lst_exit(t_lists *list, int signal)
+{
+	if (signal)
+		write(2, "Error\n", 6);
+	free(list->list_a);
+	free(list->list_b);
+	exit(1);
+}
 
 int	verify_number(int add, t_lists *list)
 {
@@ -18,11 +27,7 @@ int	verify_number(int add, t_lists *list)
 	while (list->list_a[count])
 	{
 		if (list->list_a[count] == add)
-		{
-			free(list->list_a);
-			free(list->list_b);
-			exit(2);
-		}
+			free_lst_exit(list, 1);
 		count++;
 	}
 	return (add);
@@ -36,11 +41,7 @@ int ft_isdigit(char *str, t_lists *list)
 	while (str[count] != 0)
 	{
 		if (str[count] < 48 || str[count] > 57)
-		{
-			free(list->list_a);
-			free(list->list_b);
-			exit(1);
-		}
+			free_lst_exit(list, 1);
 		count++;
 	}
 	return (0);
@@ -76,10 +77,6 @@ int	ft_atoi(const char *nptr, t_lists *list)
 	while (ft_addnum(&num, *nptr) == 0)
 		nptr++;
 	if (num * sinal < -2147483648 || num * sinal > 2147483647)
-	{
-		free(list->list_a);
-		free(list->list_b);
-		exit(1);
-	}
+		free_lst_exit(list, 1);
 	return (num * sinal);
 }
