@@ -6,13 +6,11 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/08 23:06:37 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/08 23:37:16 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "utils.h"
 
 static int verify_number(int add, int *list)
 {
@@ -37,7 +35,12 @@ int main(int argc, char **argv)
 	n = 0;
 	while (n + 1< argc)
 	{
-		numbers[n] = verify_number(atoi(argv[n + 1]), numbers);
+		if (ft_isdigit(argv[n + 1]))
+		{
+			printf("letters is not permitido\n");
+			exit(1);
+		}
+		numbers[n] = verify_number(ft_atoi(argv[n + 1]), numbers);
 		n++;
 	}
 	n = 0;
