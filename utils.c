@@ -6,11 +6,26 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/08 23:45:11 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/09 12:29:19 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+int	verify_number(int add, int *list)
+{
+	int count = 0;
+	while (list[count])
+	{
+		if (list[count] == add)
+		{
+			printf("number cloned!!\n");
+			exit(2);
+		}
+		count++;
+	}
+	return (add);
+}
 
 int ft_isdigit(char *str)
 {
@@ -20,7 +35,10 @@ int ft_isdigit(char *str)
 	while (str[count] != 0)
 	{
 		if (str[count] < 48 || str[count] > 57)
-			return (1);
+		{
+			printf("letters is not permitido\n");
+			exit(1);
+		}
 		count++;
 	}
 	return (0);
