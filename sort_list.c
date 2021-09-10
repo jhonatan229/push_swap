@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 16:50:39 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:22:03 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,20 @@
 static void print_list(t_lists *list)
 {
 	int n = 0;
+	printf("list A with %i itens\n", list->size_a);
 	while (n < list->size_a)
 	{
 		printf("list A %i: %i\n", n, list->list_a[n]);
 		n++;
 	}
 	n = 0;
-	printf("\n");
+	printf("list B with %i itens\n", list->size_b);
 	while (n < list->size_b)
 	{
 		printf("list B %i: %i\n", n, list->list_b[n]);
 		n++;
 	}
+	printf("\n");
 }
 
 
@@ -48,17 +50,27 @@ static int	quantity_num(int num)
 	return (count);
 }
 
-static int max_places(int *lst, int size, int max)
+static int max_places(int *lst, int size, int *max)
 {
 	int places;
 	int aux;
+	int	count;
 
 	places = 0;
-	while (--size > -1)
+	count = 0;
+	while (count < size)
 	{
-		aux = quantity_num(lst[size]);
-		if (aux > places && aux < max)
+		aux = quantity_num(lst[count++]);
+		if (aux > places && aux < *max)
 			places = aux;
+	}
+	*max = places;
+	places = 0;
+	count = 0;
+	while (count < size)
+	{
+		if (quantity_num(lst[count++]) == *max)
+			places++;
 	}
 	return (places);
 }
@@ -87,33 +99,48 @@ static void push_number(t_lists *lst, int pos)
 {
 	while (pos != lst->size_a - 1)
 	{
-		if (pos < lst->size_a / 2)
+		print_list(lst);
+		if (pos <= lst->size_a / 2)
 		{
 			reverse_rotate_list(lst->list_a, lst->size_a);
-			pos--;
+			if (pos != 0)
+				pos--;
+			else
+				pos = lst->size_a - 1;
 		}
-		else if (pos > lst->size_a / 2)
+		else 
 		{
 			rotate_list(lst->list_a, lst->size_a);
 			pos++;
 		}
 	}
+	//print_list(lst);
 	push_num_to_lst(lst, 0);
+	print_list(lst);
 }
 
 int	sort_list(t_lists *lst)
 {
 	int max_place;
 	int pos;
+	int quantity;
 
 	max_place = 11;
+	quantity = max_places(lst->list_a, lst->size_a, &max_place);
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
-		max_place = max_places(lst->list_a, lst->size_a, max_place);
-		pos = take_pos(lst->list_a, lst->size_a, max_place);
-		push_number(lst, pos);
-		printf("max %i, pos_min %i\n", max_place, pos);
+		while (quantity != 0)
+		{
+			pos = take_pos(lst->list_a, lst->size_a, max_place);
+			printf("max %i, pos_min %i\n", max_place, pos);
+			push_number(lst, pos);
+			quantity--;
+		}
+		while (lst->size_b)
+			push_num_to_lst(lst, 1);
 		print_list(lst);
+		//quantity = max_places(lst->list_a, lst->size_a, &max_place);
+		//if (max_place == 0)
 		exit(1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 16:47:06 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 18:13:20 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	push_num_to_lst(t_lists *list, int signal)
 			return ;
 		}
 		list->list_b[list->size_b] = list->list_a[list->size_a - 1];
-		list->list_a[list->size_a - 1] = 0;
+		//list->list_a[list->size_a - 1] = 0;
 		list->size_a--;
 		list->size_b++;
 	}
