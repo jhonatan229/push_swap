@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 19:43:43 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 12:14:15 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 	lst.size_a = n;
 	lst.size_b = 0;
 	if (!verify_sort_list(lst.list_a, lst.size_a))
-		free_lst_exit(&lst, 1);
+		free_lst_exit(&lst, 0);
 	print_list(&lst);
 	swap(lst.list_a, argc - 1);
 	put_lst_to_lst(&lst, 2);

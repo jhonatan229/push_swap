@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 18:54:27 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 12:26:10 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,14 @@ void	swap(int *lst, int size)
 
 int	verify_sort_list(int *lst, int size)
 {
-	int count;
-
-	count = 0;
-	if (size < 1)
+	if (size < 2)
 		return (0);
-	while (count < size)
+	size--;
+	while (size != 0)
 	{
-		if (lst[count] > lst[count + 1])
+		if (lst[size] > lst[size - 1])
 			return (1);
+		size--;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/09 19:44:54 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 12:10:54 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int ft_isdigit(char *str, t_lists *list)
 	return (0);
 }
 
-int static	ft_addnum(int *num, char c)
+static int 	ft_addnum(long *num, char c)
 {
 	if (c >= '0' && c <= '9')
 	{
@@ -61,8 +61,8 @@ int static	ft_addnum(int *num, char c)
 
 int	ft_atoi(const char *nptr, t_lists *list)
 {
-	int	sinal;
-	int	num;
+	int		sinal;
+	long	num;
 
 	num = 0;
 	sinal = 1;
