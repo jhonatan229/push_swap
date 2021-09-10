@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 15:42:18 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/10 16:47:06 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	reverse_rotate_list(int *lst, int size)
 	lst[count] = aux;
 }
 
-void	put_lst_to_lst(t_lists *list, int signal)
+void	push_num_to_lst(t_lists *list, int signal)
 {
 	if (signal == 1)
 	{
