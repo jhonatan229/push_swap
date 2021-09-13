@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 12:10:54 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:36:59 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int ft_isdigit(char *str, t_lists *list)
 	int count;
 
 	count = 0;
+	if (str[count] == '-')
+		count++;
 	while (str[count] != 0)
 	{
 		if (str[count] < 48 || str[count] > 57)

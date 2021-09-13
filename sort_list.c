@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/13 13:59:03 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:28:20 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,11 @@ static int take_pos (int *lst, int size, int max)
 {
 	int num;
 	int pos;
+	int aux_size;
 
 	num = 2147483647;
 	pos = -1;
+	aux_size = size;
 	while (--size > -1)
 	{
 		if (quantity_num(lst[size]) == max)
@@ -93,6 +95,8 @@ static int take_pos (int *lst, int size, int max)
 			}
 		}
 	}
+	if (pos == -1 && max <= 10)
+		pos = take_pos(lst, aux_size, max + 1);		
 	return (pos);
 }
 static void verify_pos_to_push(t_lists *lst, int pos)
@@ -141,6 +145,7 @@ int	sort_list(t_lists *lst)
 			quantity--;
 		}
 		pos = take_pos(lst->list_a, lst->size_a, max_place + 1);
+		printf("pos: %i\n", pos);
 		if (pos > -1)
 			verify_pos_to_push(lst, pos);
 		while (lst->size_b)
