@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 16:49:04 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/13 13:43:08 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int main(int argc, char **argv)
 	int n;
 
 	n = 0;
-	lst.list_a = (int *)malloc(argc - 1);
-	lst.list_b = (int *)malloc(argc - 1);
+	lst.list_a = (int *)calloc(argc - 1, sizeof(int));
+	lst.list_b = (int *)calloc(argc - 1, sizeof(int));
 	argc--;
 	while (argc != 0)
 	{

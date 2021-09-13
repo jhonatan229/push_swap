@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 18:22:03 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/13 13:59:03 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ static int take_pos (int *lst, int size, int max)
 	int pos;
 
 	num = 2147483647;
+	pos = -1;
 	while (--size > -1)
 	{
 		if (quantity_num(lst[size]) == max)
@@ -94,8 +95,7 @@ static int take_pos (int *lst, int size, int max)
 	}
 	return (pos);
 }
-
-static void push_number(t_lists *lst, int pos)
+static void verify_pos_to_push(t_lists *lst, int pos)
 {
 	while (pos != lst->size_a - 1)
 	{
@@ -114,7 +114,11 @@ static void push_number(t_lists *lst, int pos)
 			pos++;
 		}
 	}
-	//print_list(lst);
+}
+
+static void push_number(t_lists *lst, int pos)
+{
+	verify_pos_to_push(lst, pos);
 	push_num_to_lst(lst, 0);
 	print_list(lst);
 }
@@ -136,12 +140,15 @@ int	sort_list(t_lists *lst)
 			push_number(lst, pos);
 			quantity--;
 		}
+		pos = take_pos(lst->list_a, lst->size_a, max_place + 1);
+		if (pos > -1)
+			verify_pos_to_push(lst, pos);
 		while (lst->size_b)
 			push_num_to_lst(lst, 1);
 		print_list(lst);
-		//quantity = max_places(lst->list_a, lst->size_a, &max_place);
+		quantity = max_places(lst->list_a, lst->size_a, &max_place);
 		//if (max_place == 0)
-		exit(1);
+		//	exit(1);
 	}
 	return (0);
 }
