@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/10 18:13:20 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/13 22:24:17 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	rotate_list(int *lst, int size)
 		size--;
 	}
 	lst[size] = aux;
+	write(1, "r\n", 2);
 }
 
 void	reverse_rotate_list(int *lst, int size)
@@ -43,6 +44,7 @@ void	reverse_rotate_list(int *lst, int size)
 		count++;
 	}
 	lst[count] = aux;
+	write(1, "rr\n", 3);
 }
 
 void	push_num_to_lst(t_lists *list, int signal)
@@ -55,9 +57,9 @@ void	push_num_to_lst(t_lists *list, int signal)
 			return ;
 		}
 		list->list_a[list->size_a] = list->list_b[list->size_b - 1];
-		list->list_b[list->size_b - 1] = 0;
 		list->size_b--;
 		list->size_a++;
+		write(1, "pa\n", 3);
 	}
 	else
 	{
@@ -67,9 +69,9 @@ void	push_num_to_lst(t_lists *list, int signal)
 			return ;
 		}
 		list->list_b[list->size_b] = list->list_a[list->size_a - 1];
-		//list->list_a[list->size_a - 1] = 0;
 		list->size_a--;
 		list->size_b++;
+		write(1, "pb\n", 3);
 	}
 }
 
