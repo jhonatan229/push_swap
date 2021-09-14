@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/14 11:29:08 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:09:23 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ static int take_negative_pos(int *lst, int size, int max)
 	return (pos);
 }
 
-static void verify_pos_to_push(t_lists *lst, int pos)
+void verify_pos_to_push(t_lists *lst, int pos)
 {
 	while (pos != lst->size_a - 1)
 	{
@@ -257,7 +257,7 @@ int	sort_list(t_lists *lst)
 	max_positive_place = 11;
 	max_negative_place = 0;
 	if (lst->size_a <= 5)
-		sort_small_list(lst);
+		sort_small_list(lst);	
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
 		if (max_positive_place != 0)
