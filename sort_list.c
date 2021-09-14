@@ -6,30 +6,30 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/13 23:36:27 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/14 11:29:08 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-//static void print_list(t_lists *list)
-//{
-//	int n = 0;
-//	printf("list A with %i itens\n", list->size_a);
-//	while (n < list->size_a)
-//	{
-//		printf("list A %i: %i\n", n, list->list_a[n]);
-//		n++;
-//	}
-//	n = 0;
-//	printf("list B with %i itens\n", list->size_b);
-//	while (n < list->size_b)
-//	{
-//		printf("list B %i: %i\n", n, list->list_b[n]);
-//		n++;
-//	}
-//	printf("\n");
-//}
+static void print_list(t_lists *list)
+{
+	int n = 0;
+	printf("list A with %i itens\n", list->size_a);
+	while (n < list->size_a)
+	{
+		printf("list A %i: %i\n", n, list->list_a[n]);
+		n++;
+	}
+	n = 0;
+	printf("list B with %i itens\n", list->size_b);
+	while (n < list->size_b)
+	{
+		printf("list B %i: %i\n", n, list->list_b[n]);
+		n++;
+	}
+	printf("\n");
+}
 
 
 static int	quantity_num(int num)
@@ -256,6 +256,8 @@ int	sort_list(t_lists *lst)
 
 	max_positive_place = 11;
 	max_negative_place = 0;
+	if (lst->size_a <= 5)
+		sort_small_list(lst);
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
 		if (max_positive_place != 0)
@@ -265,5 +267,6 @@ int	sort_list(t_lists *lst)
 		//if (max_place == 0)
 		//	exit(1);
 	}
+	print_list(lst);
 	return (0);
 }

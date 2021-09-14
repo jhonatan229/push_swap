@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/13 22:24:17 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/14 11:30:33 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	push_num_to_lst(t_lists *list, int signal)
 	}
 }
 
-void	swap(int *lst, int size)
+void	swap(int *lst, int size, int signal)
 {
 	int aux;
 	
@@ -84,6 +84,10 @@ void	swap(int *lst, int size)
 	aux = lst[size - 1];
 	lst[size - 1] = lst[size - 2];
 	lst[size - 2] = aux;
+	if (signal == 1)
+		write(1, "sa\n", 3);
+	else
+		write(1, "sb\n", 3);
 }
 
 int	verify_sort_list(int *lst, int size, int signal)

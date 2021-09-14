@@ -1,5 +1,5 @@
 NAME = push_swap
-FILES = ./utils.c ./main.c ./utils_order_list.c ./sort_list.c
+FILES = ./utils.c ./main.c ./utils_order_list.c ./sort_list.c ./sort_small_list.c
 
 CC = clang
 CFLAGS = -Wextra -Werror -Wall
