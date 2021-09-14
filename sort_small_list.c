@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 10:21:28 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/14 12:08:53 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/14 12:21:57 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,7 @@ void	sort_small_list(t_lists *lst)
 		sort_four_five(lst, 4);
 	if (lst->size_a == 5)
 		sort_four_five(lst, 5);
+	else
+		if (lst->list_a[1] > lst->list_a[0])
+			swap(lst->list_a, lst->size_a, 1);
 }
