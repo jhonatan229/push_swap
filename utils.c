@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/13 14:36:59 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:25:28 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	free_lst_exit(t_lists *list, int signal)
 	exit(1);
 }
 
-int	verify_number(int add, t_lists *list)
+int	verify_number(int add, t_lists *list, int limit)
 {
 	int count = 0;
-	while (list->list_a[count])
+	while (count < limit)
 	{
 		if (list->list_a[count] == add)
 			free_lst_exit(list, 1);

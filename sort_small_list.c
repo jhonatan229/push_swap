@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 10:21:28 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 00:04:45 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:59:35 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void sort_three(t_lists *lst)
 		count++;
 	}
 	if (lst->list_a[lst->size_a - 1] == max)
-		rotate_list(lst->list_a, lst->size_a);
+		rotate_list(lst->list_a, lst->size_a, 1);
 	else if (lst->list_a[1] == max)
-		reverse_rotate_list(lst->list_a, lst->size_a);
+		reverse_rotate_list(lst->list_a, lst->size_a, 1);
 	if (lst->list_a[lst->size_a - 1] > lst->list_a[lst->size_a - 2])
 		swap(lst->list_a, lst->size_a, 1);
 }
@@ -50,7 +50,7 @@ static void sort_four_five(t_lists *lst, int signal)
 		}
 		count++;
 	}
-	verify_pos_to_push(lst->list_a, lst->size_a, pos);
+	verify_pos_to_push(lst->list_a, lst->size_a, pos, 1);
 	push_num_to_lst(lst, 0);
 	if (signal == 5)
 		sort_four_five(lst, 4);

@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/13 13:43:08 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:45:33 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int main(int argc, char **argv)
 	while (argc != 0)
 	{
 		ft_isdigit(argv[argc], &lst);
-		lst.list_a[n++] = verify_number(ft_atoi(argv[argc--], &lst), &lst);
+		lst.list_a[n] = verify_number(ft_atoi(argv[argc--], &lst), &lst, n);
+		n++;
 	}
 	lst.size_a = n;
 	lst.size_b = 0;

@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 13:04:59 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:58:10 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,14 @@ static int find_max_chunck(t_lists *lst, int *last, int chunck)
 	return (chunck);
 }
 
-void verify_pos_to_push(int *lst, int size, int pos)
+void verify_pos_to_push(int *lst, int size, int pos, int signal)
 {
 	while (pos != size - 1)
 	{
 		//print_list(lst);
 		if (pos <= size / 2)
 		{
-			reverse_rotate_list(lst, size);
+			reverse_rotate_list(lst, size, signal);
 			if (pos != 0)
 				pos--;
 			else
@@ -68,7 +68,7 @@ void verify_pos_to_push(int *lst, int size, int pos)
 		}
 		else 
 		{
-			rotate_list(lst, size);
+			rotate_list(lst, size, signal);
 			pos++;
 		}
 	}
@@ -101,13 +101,13 @@ static void push_number(t_lists *lst, int pos)
 {
 	int	pos_b;
 	
-	verify_pos_to_push(lst->list_a, lst->size_a, pos);
+	verify_pos_to_push(lst->list_a, lst->size_a, pos, 1);
 	if (!lst->size_b)
 		push_num_to_lst(lst, 0);
 	else
 	{
 		pos_b = check_top_b(lst->list_b, lst->size_b, lst->list_a[lst->size_a - 1]);
-		verify_pos_to_push(lst->list_b, lst->size_b, pos_b);
+		verify_pos_to_push(lst->list_b, lst->size_b, pos_b, 2);
 		push_num_to_lst(lst, 0);
 	}
 }
@@ -129,7 +129,7 @@ static void return_b_to_a(t_lists *lst)
 		}
 		count++;
 	}
-	verify_pos_to_push(lst->list_b, lst->size_b, pos);
+	verify_pos_to_push(lst->list_b, lst->size_b, pos, 2);
 	while(lst->size_b)
 		push_num_to_lst(lst, 1);
 }
@@ -192,6 +192,6 @@ int	sort_list(t_lists *lst)
 		//	exit(1);
 		max_chunck--;
 	}
-	
+	//print_list(lst);
 	return (0);
 }

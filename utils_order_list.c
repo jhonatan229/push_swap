@@ -6,13 +6,13 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/14 11:30:33 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 14:58:46 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-void	rotate_list(int *lst, int size)
+void	rotate_list(int *lst, int size, int signal)
 {
 	int aux;
 
@@ -26,10 +26,13 @@ void	rotate_list(int *lst, int size)
 		size--;
 	}
 	lst[size] = aux;
-	write(1, "r\n", 2);
+	if (signal == 1)
+		write(1, "ra\n", 3);
+	else if (signal == 2)
+		write(1, "rb\n", 3);
 }
 
-void	reverse_rotate_list(int *lst, int size)
+void	reverse_rotate_list(int *lst, int size, int signal)
 {	
 	int aux;
 	int	count;
@@ -44,7 +47,10 @@ void	reverse_rotate_list(int *lst, int size)
 		count++;
 	}
 	lst[count] = aux;
-	write(1, "rr\n", 3);
+	if (signal == 1)
+		write(1, "rra\n", 4);
+	else if (signal == 2)
+		write(1, "rrb\n", 4);
 }
 
 void	push_num_to_lst(t_lists *list, int signal)
