@@ -6,30 +6,30 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 00:37:55 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 12:27:08 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void print_list(t_lists *list)
-{
-	int n = 0;
-	printf("list A with %i itens\n", list->size_a);
-	while (n < list->size_a)
-	{
-		printf("list A %i: %i\n", n, list->list_a[n]);
-		n++;
-	}
-	n = 0;
-	printf("list B with %i itens\n", list->size_b);
-	while (n < list->size_b)
-	{
-		printf("list B %i: %i\n", n, list->list_b[n]);
-		n++;
-	}
-	printf("\n");
-}
+//static void print_list(t_lists *list)
+//{
+//	int n = 0;
+//	printf("list A with %i itens\n", list->size_a);
+//	while (n < list->size_a)
+//	{
+//		printf("list A %i: %i\n", n, list->list_a[n]);
+//		n++;
+//	}
+//	n = 0;
+//	printf("list B with %i itens\n", list->size_b);
+//	while (n < list->size_b)
+//	{
+//		printf("list B %i: %i\n", n, list->list_b[n]);
+//		n++;
+//	}
+//	printf("\n");
+//}
 
 static void find_two_pos(t_lists *lst, int *f_pos, int *s_pos)
 {
@@ -188,7 +188,7 @@ int	sort_list(t_lists *lst)
 			return_b_to_a(lst);
 		}
 		printf("number f: %i, number s: %i\n", first_pos, second_pos);
-		print_list(lst);
+		//print_list(lst);
 		if (!lst->size_b)
 			exit(1);
 	}
