@@ -6,32 +6,32 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 00:37:55 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 13:04:59 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void print_list(t_lists *list)
-{
-	int n = 0;
-	printf("list A with %i itens\n", list->size_a);
-	while (n < list->size_a)
-	{
-		printf("list A %i: %i\n", n, list->list_a[n]);
-		n++;
-	}
-	n = 0;
-	printf("list B with %i itens\n", list->size_b);
-	while (n < list->size_b)
-	{
-		printf("list B %i: %i\n", n, list->list_b[n]);
-		n++;
-	}
-	printf("\n");
-}
+//static void print_list(t_lists *list)
+//{
+//	int n = 0;
+//	printf("list A with %i itens\n", list->size_a);
+//	while (n < list->size_a)
+//	{
+//		printf("list A %i: %i\n", n, list->list_a[n]);
+//		n++;
+//	}
+//	n = 0;
+//	printf("list B with %i itens\n", list->size_b);
+//	while (n < list->size_b)
+//	{
+//		printf("list B %i: %i\n", n, list->list_b[n]);
+//		n++;
+//	}
+//	printf("\n");
+//}
 
-static void find_two_pos(t_lists *lst, int *f_pos, int *s_pos)
+static int find_max_chunck(t_lists *lst, int *last, int chunck)
 {
 	int num;
 	int count;
@@ -40,14 +40,17 @@ static void find_two_pos(t_lists *lst, int *f_pos, int *s_pos)
 	num = 2147483647;
 	while (count < lst->size_a)
 	{
-		if (lst->list_a[count] < num)
-		{
-			*s_pos = *f_pos;
-			*f_pos = count;
+		if (lst->list_a[count] < num && lst->list_a[count] > *last)
 			num = lst->list_a[count];
-		}
 		count++;
 	}
+	chunck++;
+	*last = num;
+	if (chunck == 20 || num == 2147483647)
+		return (chunck);
+	else
+		chunck = find_max_chunck(lst, last, chunck);
+	return (chunck);
 }
 
 void verify_pos_to_push(int *lst, int size, int pos)
@@ -131,55 +134,52 @@ static void return_b_to_a(t_lists *lst)
 		push_num_to_lst(lst, 1);
 }
 
-static void push_more_close(t_lists *lst, int f_pos, int s_pos)
+static void push_more_close(t_lists *lst, int chunck)
 {
-	if (f_pos >= lst->size_a / 2 && s_pos >= lst->size_a / 2)
+	int count;
+	int dif;
+	int pos;
+
+	pos = 0;
+	dif = 2147483647;
+	count = 0;
+	while (count < lst->size_a)
 	{
-		if (lst->size_a - f_pos < lst->size_a - s_pos)
-			push_number(lst, f_pos);
-		else
-			push_number(lst, s_pos);
+		if (lst->list_a[count] < chunck)
+		{
+			if (count < dif)
+			{
+				pos = count;
+				dif = count;
+			}
+			else if (lst->size_a - count < dif)
+			{
+				pos = count;
+				dif = lst->size_a - count;
+			}
+		}
+		count++;
 	}
-	else if (f_pos < lst->size_a / 2 && s_pos < lst->size_a / 2)
-	{
-		printf("entrei poha\n");
-		if (f_pos < s_pos)
-			push_number(lst, f_pos);
-		else
-			push_number(lst, s_pos);
-	}
-	else if (f_pos < lst->size_a / 2 && s_pos > lst->size_a / 2)
-	{
-		if (f_pos < lst->size_a - s_pos)
-			push_number(lst, f_pos);
-		else
-			push_number(lst, s_pos);
-	}
-	else if (f_pos >= lst->size_a / 2 && s_pos < lst->size_a / 2)
-	{
-		if (lst->size_a - f_pos < s_pos)
-			push_number(lst, f_pos);
-		else
-			push_number(lst, s_pos);
-	}
+	push_number(lst, pos);
 }
 
 int	sort_list(t_lists *lst)
 {
-	int	first_pos;
-	int	second_pos;
+	int max_chunck;
+	int	last_in_chunck;
 
-	first_pos = 0;
-	second_pos = 0;
+	max_chunck = 0;
 	if (lst->size_a <= 5)
 		sort_small_list(lst);
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
-		if (lst->size_a > 2)
+		if (max_chunck == 0)
 		{
-			find_two_pos(lst, &first_pos, &second_pos);
-			push_more_close(lst, first_pos, second_pos);
+			last_in_chunck = -2147483648;
+			max_chunck = find_max_chunck(lst, &last_in_chunck, max_chunck);
 		}
+		if (lst->size_a > 2)
+			push_more_close(lst, last_in_chunck);
 		else if (lst->size_a == 2)
 			push_number(lst, 1);
 		else
@@ -187,10 +187,10 @@ int	sort_list(t_lists *lst)
 			push_number(lst, 0);
 			return_b_to_a(lst);
 		}
-		printf("number f: %i, number s: %i\n", first_pos, second_pos);
-		print_list(lst);
-		if (!lst->size_b)
-			exit(1);
+		//print_list(lst);
+		//if (!lst->size_b)
+		//	exit(1);
+		max_chunck--;
 	}
 	
 	return (0);
