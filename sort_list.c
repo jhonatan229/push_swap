@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/14 12:09:23 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 00:37:55 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,242 +31,167 @@ static void print_list(t_lists *list)
 	printf("\n");
 }
 
-
-static int	quantity_num(int num)
+static void find_two_pos(t_lists *lst, int *f_pos, int *s_pos)
 {
+	int num;
 	int count;
 
 	count = 0;
-	if (num == -2147483648)
-		return (10);
-	if (num < 0)
-		num = num * -1;
-	while (num >= 10)
+	num = 2147483647;
+	while (count < lst->size_a)
 	{
-		num /= 10;
+		if (lst->list_a[count] < num)
+		{
+			*s_pos = *f_pos;
+			*f_pos = count;
+			num = lst->list_a[count];
+		}
 		count++;
 	}
-	count++;
-	return (count);
 }
 
-//max começa com 11
-static int max_pos_places(int *lst, int size, int *max)
+void verify_pos_to_push(int *lst, int size, int pos)
 {
-	int places;
-	int aux;
-	int	count;
-
-	places = 0;
-	count = 0;
-	while (count < size)
-	{
-		aux = quantity_num(lst[count++]);
-		if (aux > places && aux < *max)
-			places = aux;
-	}
-	*max = places;
-	count = -1;
-	places = 0;
-	while (++count < size)
-		if (quantity_num(lst[count]) == *max && lst[count] >= 0)
-			places++;
-	return (places);
-}
-
-//max começa com 0
-static int max_neg_places(int *lst, int size, int *max)
-{
-	int places;
-	int aux;
-	int	count;
-
-	places = 10;
-	count = 0;
-	while (count < size)
-	{
-		aux = quantity_num(lst[count++]);
-		if (aux < places && aux > *max)
-			places = aux;
-	}
-	*max = places;
-	count = -1;
-	places = 0;
-	while (++count < size)
-		if (quantity_num(lst[count]) == *max && lst[count] < 0)
-			places++;
-	return (places);
-}
-
-static int take_positive_pos(int *lst, int size, int max)
-{
-	int num;
-	int pos;
-	int aux_size;
-
-	num = 2147483647;
-	pos = -1;
-	aux_size = size;
-	while (--size > -1)
-	{
-		if (quantity_num(lst[size]) == max && lst[size] >= 0)
-		{
-			if (lst[size] < num)
-			{
-				num = lst[size];
-				pos = size;
-			}
-		}
-	}
-	if (pos == -1 && max <= 10)
-		pos = take_positive_pos(lst, aux_size, max + 1);		
-	return (pos);
-}
-
-static int link_signal_sorts(int *lst, int size, int max)
-{
-	int aux_size;
-	int pos;
-	int num;
-
-	aux_size = size;
-	pos = -1;
-	num = 2147483647;
-	while (--size > -1)
-	{
-		if (quantity_num(lst[size]) == max && lst[size] >= 0)
-		{
-			if (lst[size] < num)
-			{
-				num = lst[size];
-				pos = size;
-			}
-		}
-	}
-	if (pos == -1 && max <= 10)
-		pos = link_signal_sorts(lst, aux_size, max + 1);
-	return (pos);
-}
-
-static int take_negative_pos(int *lst, int size, int max)
-{
-	int num;
-	int pos;
-	int aux_size;
-
-	num = 0;
-	pos = -1;
-	aux_size = size;
-	while (--size > -1)
-	{
-		if (quantity_num(lst[size]) == max && lst[size] < 0)
-		{
-			if (lst[size] < num)
-			{
-				num = lst[size];
-				pos = size;
-			}
-		}
-	}
-	if (pos == -1 && max > 0)
-		pos = take_negative_pos(lst, aux_size, max - 1);
-	else if (pos == -1)
-		pos = link_signal_sorts(lst, aux_size, 1);
-	return (pos);
-}
-
-void verify_pos_to_push(t_lists *lst, int pos)
-{
-	while (pos != lst->size_a - 1)
+	while (pos != size - 1)
 	{
 		//print_list(lst);
-		if (pos <= lst->size_a / 2)
+		if (pos <= size / 2)
 		{
-			reverse_rotate_list(lst->list_a, lst->size_a);
+			reverse_rotate_list(lst, size);
 			if (pos != 0)
 				pos--;
 			else
-				pos = lst->size_a - 1;
+				pos = size - 1;
 		}
 		else 
 		{
-			rotate_list(lst->list_a, lst->size_a);
+			rotate_list(lst, size);
 			pos++;
 		}
 	}
 }
 
+static int check_top_b(int *lst, int size, int num)
+{
+	int dif;
+	int	pos;
+	int count;
+
+	count = 0;
+	dif = 2147483647;
+	pos = 0;
+	while (count < size)
+	{
+		if (num - lst[count] < dif && lst[count] < num)
+		{
+			dif = num - lst[count];
+			pos = count;
+		}
+		count++;
+	}
+	if (dif == 2147483647)
+		pos = check_top_b(lst, size, 2147483647);
+	return (pos);
+}
+
 static void push_number(t_lists *lst, int pos)
 {
-	verify_pos_to_push(lst, pos);
-	push_num_to_lst(lst, 0);
-	//print_list(lst);
+	int	pos_b;
+	
+	verify_pos_to_push(lst->list_a, lst->size_a, pos);
+	if (!lst->size_b)
+		push_num_to_lst(lst, 0);
+	else
+	{
+		pos_b = check_top_b(lst->list_b, lst->size_b, lst->list_a[lst->size_a - 1]);
+		verify_pos_to_push(lst->list_b, lst->size_b, pos_b);
+		push_num_to_lst(lst, 0);
+	}
 }
 
-static void sort_positive_numbers(t_lists *lst, int *max_place)
+static void return_b_to_a(t_lists *lst)
 {
-	int quantity;
+	int count;
 	int pos;
+	int num;
 
-	quantity = max_pos_places(lst->list_a, lst->size_a, max_place);
-	while (quantity != 0)
+	num = -2147483648;
+	count = 0;
+	while (count < lst->size_b)
 	{
-		pos = take_positive_pos(lst->list_a, lst->size_a, *max_place);
-		//printf("max %i, pos_min %i, quanti: %i\n", *max_place, pos, quantity);
-		//print_list(lst);
-		push_number(lst, pos);
-		quantity--;
+		if (lst->list_b[count] > num)
+		{
+			num = lst->list_b[count];
+			pos = count;
+		}
+		count++;
 	}
-	pos = take_positive_pos(lst->list_a, lst->size_a, *max_place + 1);
-	//printf("pos: %i\n", pos);
-	if (pos > -1)
-		verify_pos_to_push(lst, pos);
-	while (lst->size_b)
+	verify_pos_to_push(lst->list_b, lst->size_b, pos);
+	while(lst->size_b)
 		push_num_to_lst(lst, 1);
-	//print_list(lst);
 }
 
-static void sort_negative_numbers(t_lists *lst, int *max_place)
+static void push_more_close(t_lists *lst, int f_pos, int s_pos)
 {
-	int quantity;
-	int pos;
-
-	quantity = max_neg_places(lst->list_a, lst->size_a, max_place);
-	while (quantity != 0)
+	if (f_pos >= lst->size_a / 2 && s_pos >= lst->size_a / 2)
 	{
-		pos = take_negative_pos(lst->list_a, lst->size_a, *max_place);
-		//printf("max %i, pos_min %i\n", *max_place, pos);
-		//print_list(lst);
-		push_number(lst, pos);
-		quantity--;
+		if (lst->size_a - f_pos < lst->size_a - s_pos)
+			push_number(lst, f_pos);
+		else
+			push_number(lst, s_pos);
 	}
-	pos = take_negative_pos(lst->list_a, lst->size_a, *max_place - 1);
-	//printf("MY POS: %i\n", pos);
-	if (pos > -1)
-		verify_pos_to_push(lst, pos);
-	while (lst->size_b)
-		push_num_to_lst(lst, 1);
-	//print_list(lst);
+	else if (f_pos < lst->size_a / 2 && s_pos < lst->size_a / 2)
+	{
+		printf("entrei poha\n");
+		if (f_pos < s_pos)
+			push_number(lst, f_pos);
+		else
+			push_number(lst, s_pos);
+	}
+	else if (f_pos < lst->size_a / 2 && s_pos > lst->size_a / 2)
+	{
+		if (f_pos < lst->size_a - s_pos)
+			push_number(lst, f_pos);
+		else
+			push_number(lst, s_pos);
+	}
+	else if (f_pos >= lst->size_a / 2 && s_pos < lst->size_a / 2)
+	{
+		if (lst->size_a - f_pos < s_pos)
+			push_number(lst, f_pos);
+		else
+			push_number(lst, s_pos);
+	}
 }
 
 int	sort_list(t_lists *lst)
 {
-	int max_positive_place;
-	int max_negative_place;
+	int	first_pos;
+	int	second_pos;
 
-	max_positive_place = 11;
-	max_negative_place = 0;
+	first_pos = 0;
+	second_pos = 0;
 	if (lst->size_a <= 5)
-		sort_small_list(lst);	
+		sort_small_list(lst);
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
-		if (max_positive_place != 0)
-			sort_positive_numbers(lst, &max_positive_place);
-		else if (max_negative_place != 10)
-			sort_negative_numbers(lst, &max_negative_place);
-		//if (max_place == 0)
-		//	exit(1);
+		if (lst->size_a > 2)
+		{
+			find_two_pos(lst, &first_pos, &second_pos);
+			push_more_close(lst, first_pos, second_pos);
+		}
+		else if (lst->size_a == 2)
+			push_number(lst, 1);
+		else
+		{
+			push_number(lst, 0);
+			return_b_to_a(lst);
+		}
+		printf("number f: %i, number s: %i\n", first_pos, second_pos);
+		print_list(lst);
+		if (!lst->size_b)
+			exit(1);
 	}
-	print_list(lst);
+	
 	return (0);
 }

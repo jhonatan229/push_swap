@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 10:21:28 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/14 12:21:57 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/15 00:04:45 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void sort_four_five(t_lists *lst, int signal)
 		}
 		count++;
 	}
-	verify_pos_to_push(lst, pos);
+	verify_pos_to_push(lst->list_a, lst->size_a, pos);
 	push_num_to_lst(lst, 0);
 	if (signal == 5)
 		sort_four_five(lst, 4);
