@@ -6,16 +6,16 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 10:21:28 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 14:59:35 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/16 15:56:45 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void sort_three(t_lists *lst)
+static void	sort_three(t_lists *lst)
 {
-	int max;
-	int count;
+	int	max;
+	int	count;
 
 	max = -2147483648;
 	count = 0;
@@ -33,11 +33,11 @@ static void sort_three(t_lists *lst)
 		swap(lst->list_a, lst->size_a, 1);
 }
 
-static void sort_four_five(t_lists *lst, int signal)
+static void	sort_four_five(t_lists *lst, int signal)
 {
-	int min;
-	int count;
-	int pos;
+	int	min;
+	int	count;
+	int	pos;
 
 	count = 0;
 	min = 2147483647;
@@ -59,7 +59,25 @@ static void sort_four_five(t_lists *lst, int signal)
 	push_num_to_lst(lst, 1);
 }
 
-
+void	verify_pos_to_push(int *lst, int size, int pos, int signal)
+{
+	while (pos != size - 1)
+	{
+		if (pos <= size / 2)
+		{
+			reverse_rotate_list(lst, size, signal);
+			if (pos != 0)
+				pos--;
+			else
+				pos = size - 1;
+		}
+		else
+		{
+			rotate_list(lst, size, signal);
+			pos++;
+		}
+	}
+}
 
 void	sort_small_list(t_lists *lst)
 {

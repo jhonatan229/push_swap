@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 14:25:28 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/16 15:54:58 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	free_lst_exit(t_lists *list, int signal)
 
 int	verify_number(int add, t_lists *list, int limit)
 {
-	int count = 0;
+	int	count;
+
+	count = 0;
 	while (count < limit)
 	{
 		if (list->list_a[count] == add)
@@ -33,9 +35,9 @@ int	verify_number(int add, t_lists *list, int limit)
 	return (add);
 }
 
-int ft_isdigit(char *str, t_lists *list)
+int	ft_isdigit(char *str, t_lists *list)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (str[count] == '-')
@@ -49,7 +51,7 @@ int ft_isdigit(char *str, t_lists *list)
 	return (0);
 }
 
-static int 	ft_addnum(long *num, char c)
+static int	ft_addnum(long *num, char c)
 {
 	if (c >= '0' && c <= '9')
 	{

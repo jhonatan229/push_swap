@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/15 14:58:46 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/16 16:02:51 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	rotate_list(int *lst, int size, int signal)
 {
-	int aux;
+	int	aux;
 
 	if (size < 2)
 		return ;
@@ -34,11 +34,11 @@ void	rotate_list(int *lst, int size, int signal)
 
 void	reverse_rotate_list(int *lst, int size, int signal)
 {	
-	int aux;
+	int	aux;
 	int	count;
 
 	if (size < 2)
-		return ;	
+		return ;
 	count = 0;
 	aux = lst[count];
 	while (count < size - 1)
@@ -83,8 +83,8 @@ void	push_num_to_lst(t_lists *list, int signal)
 
 void	swap(int *lst, int size, int signal)
 {
-	int aux;
-	
+	int	aux;
+
 	if (size < 2)
 		return ;
 	aux = lst[size - 1];
@@ -98,7 +98,7 @@ void	swap(int *lst, int size, int signal)
 
 int	verify_sort_list(int *lst, int size, int signal)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	if (size < 2)
