@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 16:07:09 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/16 17:47:46 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int	main(int argc, char **argv)
 	if (!verify_sort_list(lst.list_a, lst.size_a, 1))
 		free_lst_exit(&lst, 0);
 	sort_list(&lst);
+	free_lst_exit(&lst, 0);
 	return (0);
 }
