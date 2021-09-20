@@ -6,29 +6,30 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 22:46:46 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 17:47:46 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:33:21 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+//will take a scruct where is the two lists, and sort the numbers on list a
 int	sort_list(t_lists *lst)
 {
-	int	max_chunck;
-	int	last_in_chunck;
+	int	max_chunk;
+	int	last_in_chunk;
 
-	max_chunck = 0;
+	max_chunk = 0;
 	if (lst->size_a <= 5)
 		sort_small_list(lst);
 	while (verify_sort_list(lst->list_a, lst->size_a, 1) || lst->size_b)
 	{
-		if (max_chunck == 0)
+		if (max_chunk == 0)
 		{
-			last_in_chunck = -2147483648;
-			max_chunck = find_max_chunck(lst, &last_in_chunck, max_chunck);
+			last_in_chunk = -2147483648;
+			max_chunk = find_max_chunk(lst, &last_in_chunk, max_chunk);
 		}
 		if (lst->size_a > 2)
-			push_more_close(lst, last_in_chunck);
+			push_more_close(lst, last_in_chunk);
 		else if (lst->size_a == 2)
 			push_number(lst, 1);
 		else
@@ -36,7 +37,7 @@ int	sort_list(t_lists *lst)
 			push_number(lst, 0);
 			return_b_to_a(lst);
 		}
-		max_chunck--;
+		max_chunk--;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 10:21:28 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 15:56:45 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:30:02 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ static void	sort_four_five(t_lists *lst, int signal)
 	push_num_to_lst(lst, 1);
 }
 
+//take the pos and verify if this pos is the last pos in the list;
+//rotate the list until the pos become the last pos in the list;
 void	verify_pos_to_push(int *lst, int size, int pos, int signal)
 {
 	while (pos != size - 1)
@@ -79,6 +81,7 @@ void	verify_pos_to_push(int *lst, int size, int pos, int signal)
 	}
 }
 
+//sort a list a with 5 or less numbers;
 void	sort_small_list(t_lists *lst)
 {
 	if (lst->size_a == 3)

@@ -6,12 +6,15 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 16:56:04 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 16:02:51 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:17:23 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+//take the last number of the list and put at the beginning
+//use signal as 1 to print ra(rotate list a);
+//and signal as 2 to print rb(rotate list b);
 void	rotate_list(int *lst, int size, int signal)
 {
 	int	aux;
@@ -32,6 +35,9 @@ void	rotate_list(int *lst, int size, int signal)
 		write(1, "rb\n", 3);
 }
 
+//take the first number at the list and put at the end
+//use signal as 1 to print rra(reverse rotate list a);
+//and signal as 2 to print rrb(reverse rotate list b);
 void	reverse_rotate_list(int *lst, int size, int signal)
 {	
 	int	aux;
@@ -53,6 +59,9 @@ void	reverse_rotate_list(int *lst, int size, int signal)
 		write(1, "rrb\n", 4);
 }
 
+//Put the last number on a list to the end of a another list.
+//use the signal as 1 to put the number in list b to list a;
+//use the signal as 2 to put the number in list a to list b;
 void	push_num_to_lst(t_lists *list, int signal)
 {
 	if (signal == 1)
@@ -81,6 +90,9 @@ void	push_num_to_lst(t_lists *list, int signal)
 	}
 }
 
+//swap the last two numbers of the list;
+//use the signal to print sa (if is list a);
+//use the signal to print sb (is is list b);
 void	swap(int *lst, int size, int signal)
 {
 	int	aux;
@@ -96,6 +108,9 @@ void	swap(int *lst, int size, int signal)
 		write(1, "sb\n", 3);
 }
 
+//verify is list is sort;
+//use the signal as 1 if you want verify list a;
+//use the signal as 2 if you want verify list b;
 int	verify_sort_list(int *lst, int size, int signal)
 {
 	int	count;

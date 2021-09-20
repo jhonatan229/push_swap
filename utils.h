@@ -6,7 +6,7 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:21:36 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 16:09:45 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:33:28 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ int		verify_sort_list(int *lst, int size, int signal);
 void	free_lst_exit(t_lists *list, int signal);
 void	sort_small_list(t_lists *lst);
 void	verify_pos_to_push(int *lst, int size, int pos, int signal);
-void	push_more_close(t_lists *lst, int chunck);
+void	push_more_close(t_lists *lst, int chunk);
 void	return_b_to_a(t_lists *lst);
 void	push_number(t_lists *lst, int pos);
-int		find_max_chunck(t_lists *lst, int *last, int chunck);
+int		find_max_chunk(t_lists *lst, int *last, int chunk);
 
 #endif

@@ -6,12 +6,14 @@
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 23:17:20 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 15:54:58 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 12:58:21 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
+//Will free the two list that use malloc.
+//If the signal is different of 0, will print on terminal 'Error'.
 void	free_lst_exit(t_lists *list, int signal)
 {
 	if (signal)
@@ -21,6 +23,8 @@ void	free_lst_exit(t_lists *list, int signal)
 	exit(1);
 }
 
+//Verify if the number that will be insert on list already is into the list. 
+//If is true, the program exits.
 int	verify_number(int add, t_lists *list, int limit)
 {
 	int	count;
@@ -35,6 +39,8 @@ int	verify_number(int add, t_lists *list, int limit)
 	return (add);
 }
 
+//Verify if the string str is a number.
+//Exit of the program if isn't.
 int	ft_isdigit(char *str, t_lists *list)
 {
 	int	count;
@@ -63,6 +69,8 @@ static int	ft_addnum(long *num, char c)
 	return (1);
 }
 
+//transform the string nptr in a number.
+//if the number is bigger than max int and less than min int, the program should exit.
 int	ft_atoi(const char *nptr, t_lists *list)
 {
 	int		sinal;

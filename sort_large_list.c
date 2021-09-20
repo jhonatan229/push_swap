@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_list.c                                        :+:      :+:    :+:   */
+/*   sort_large_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jestevam < jestevam@student.42sp.org.br    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/10 15:44:08 by jestevam          #+#    #+#             */
-/*   Updated: 2021/09/16 17:08:30 by jestevam         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:48:07 by jestevam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-int	find_max_chunck(t_lists *lst, int *last, int chunck)
+//return the quantity of number that is into my chunk
+//the max that chunk could be is 25;
+//the pointer of int 'last' mark the biggest number into my chunk
+int	find_max_chunk(t_lists *lst, int *last, int chunk)
 {
 	int	num;
 	int	count;
@@ -25,15 +28,17 @@ int	find_max_chunck(t_lists *lst, int *last, int chunck)
 			num = lst->list_a[count];
 		count++;
 	}
-	chunck++;
+	chunk++;
 	*last = num;
-	if (chunck == 25 || num == 2147483647)
-		return (chunck);
+	if (chunk == 25 || num == 2147483647)
+		return (chunk);
 	else
-		chunck = find_max_chunck(lst, last, chunck);
-	return (chunck);
+		chunk = find_max_chunk(lst, last, chunk);
+	return (chunk);
 }
 
+//return the position of number that match better with 'num';
+//the number must to be less than 'num';
 static int	check_top_b(int *lst, int size, int num)
 {
 	int	dif;
@@ -57,6 +62,7 @@ static int	check_top_b(int *lst, int size, int num)
 	return (pos);
 }
 
+//push the number that there is in the position 'pos' to list b;
 void	push_number(t_lists *lst, int pos)
 {
 	int	pos_b;
@@ -74,6 +80,8 @@ void	push_number(t_lists *lst, int pos)
 	}
 }
 
+//return all the numbers in list b to list a,
+//starting with the biggest number;
 void	return_b_to_a(t_lists *lst)
 {
 	int	count;
@@ -96,7 +104,9 @@ void	return_b_to_a(t_lists *lst)
 		push_num_to_lst(lst, 1);
 }
 
-void	push_more_close(t_lists *lst, int chunck)
+//look for the numbers that ar less than 'max_of_chunk',
+//and take the pos that is more close of the top;
+void	push_more_close(t_lists *lst, int max_of_chunk)
 {
 	int	count;
 	int	dif;
@@ -107,7 +117,7 @@ void	push_more_close(t_lists *lst, int chunck)
 	count = 0;
 	while (count < lst->size_a)
 	{
-		if (lst->list_a[count] < chunck)
+		if (lst->list_a[count] < max_of_chunk)
 		{
 			if (count < dif)
 			{
